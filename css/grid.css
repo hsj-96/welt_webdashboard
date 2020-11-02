@@ -1,5 +1,5 @@
-#gridList {
-    background-color: black;
+#dashGrid {
+    background-color: #344955;
     width: 1100px;
     margin: 0 auto;
     display: grid;
@@ -7,6 +7,8 @@
     grid-template-rows: repeat(6, 150px);
     grid-gap: 40px;
     grid-auto-flow: row dense;
+    border-top: 1px solid white;
+    padding-top: 15px;
 }
 
 .gridItem {
@@ -14,6 +16,10 @@
     box-sizing: border-box;
     position: relative;
     border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }
 
 .handle {
@@ -25,18 +31,20 @@
     right: 5px;
 }
 
+.gridItemTitle {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 #item1 {
     grid-row: span 2;
+    grid-column: span 3;
+
 }
 #item2 {
+    grid-row: span 3;
     grid-column: span 3;
-}
-#item3 {
-
-}
-#item4 {
-
-}
-#item5 {
-
 }

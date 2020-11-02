@@ -1,23 +1,22 @@
-window.onload = function () {
-    Sortable.create(gridList, { 
-        //handle: '.handle',
+window.addEventListener('DOMContentLoaded', function() {
+    Sortable.create(dashGrid, { 
+        handle: '.handle',
         swapThreshold: 1,
         animation: 150,
     });
-}
 
-function createHandleButton() {
-    const gridItems = document.querySelectorAll(".gridItem");
-    gridItems.forEach(function(gridItem) {
-        const handle= document.createElement('img');
-        handle.className = "handle";
-        handle.src = "/img/edit_arrow.png";
-        gridItem.appendChild(handle);
-    });
-}
-function removeHandleButton() {
-    const handles = document.querySelectorAll(".handle");
-    handles.forEach(function(handle) {
-        handle.parentNode.removeChild(handle);
+    d3Test();
+});
+
+function d3Test() {
+    const data = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+    const svg = d3.select('.d3Test');
+    
+    data.forEach((d, i) => {
+        svg.append('rect')
+            .attr('height', data[i])
+            .attr('width', 40)
+            .attr('x', 50 * i)
+            .attr('y', 100 - data[i])
     });
 }

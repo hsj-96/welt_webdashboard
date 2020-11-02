@@ -1,0 +1,89 @@
+.header-wrapper {
+    width: 1100px;
+    margin: 0 auto;
+    line-height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-name {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: white;
+    font-size: 18px;
+}
+
+.header-icon {
+    display: flex;
+    column-gap: 15px;
+}
+
+.header-icon img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.header-alarm {
+    position: relative;
+}
+
+.alarm-num {
+    width: 20px;
+    height: 20px;
+    background-color: #E30425;
+    position: absolute;
+    top: 31px;
+    left: 15px;
+    border-radius: 50%;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 100;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+}
+
+.alarm-modal {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: -470px;
+    top: 75px;
+    width: 500px;
+}
+  
+.alarm-modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.alarm-modal-close {
+    width: 20px;
+    float: right;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 10px;
+}
+
+.alarm-modal-close:hover,
+.alarm-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.alarm-list {
+    border-top: 1px solid black;
+    list-style-type: none;
+    margin-top: 30px;
+    padding: 0;
+}
+
+.alarm-item {
+    line-height: 80px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 0 10px;
+    border-bottom: 1px solid gray;
+}

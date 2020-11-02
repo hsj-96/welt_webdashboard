@@ -5,29 +5,88 @@
   <title>Welt Web Dashboard</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="./css/grid.css">
   <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/header.css">
+  <link rel="stylesheet" href="./css/nav.css">
+  <link rel="stylesheet" href="./css/section.css">
+  <link rel="stylesheet" href="./css/grid.css">
 
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+
+  <script src="./js/main.js"></script>
+  <script src="./js/section.js"></script>
   <script src="./js/grid.js"></script>
 </head>
 <body>
   <header>
     <div class="header-wrapper">
-      <a href="./" target="_self"><img src="img/welt_logo.webp" style="vertical-align: middle;"></a>
+      <div class="header-logo">
+        <a href="./" target="_self"><img src="img/welt_logo.webp" style="vertical-align: middle; margin-left: 10px;"></a>
+      </div>
+      <div class="header-icon">
+        <div class="header-user">
+          <img src="img/icon/user-icon.png">
+        </div>
+        <div class="user-name">
+          test_ID
+        </div>
+        <div class="header-alarm">
+          <div class="alarm-modal">
+            <div class="alarm-modal-content">
+              <div class="alarm-modal-close">&times;</div>
+              <ul class="alarm-list">
+                <li class="alarm-item">오늘 이동량이 너무 없습니다.</li>
+                <li class="alarm-item">너무 오래 앉아있습니다. 스트레칭 하세요!</li>
+                <li class="alarm-item">폭식 알림</li>
+                <li class="alarm-item">알림</li>
+                <li class="alarm-item">알림</li>
+              </ul>
+            </div>
+          </div>
+          <div class="alarm-num">1</div>
+          <img src="img/icon/alarm-icon.png">
+        </div>
+      </div>
     </div>
   </header>
   
   <nav>
-    navigation
+    <div class="nav-wrapper">
+      <ul class="nav-container">
+        <li class="nav-item"><a class="nav-selected" href="">대시보드</a></li>
+        <li class="nav-item"><a href="">메뉴2</a></li>
+        <li class="nav-item"><a href="">메뉴3</a></li>
+        <li class="nav-item"><a href="">메뉴4</a></li>
+      </ul>
+    </div>
   </nav>
   
   <section>
-    <div id="gridList" class="list-group">
-      <div class="gridItem" id="item1">This is 1 item</div>
-      <div class="gridItem" id="item2">This is 2 item</div>
+    <div class="dashHeader">
+      <div class="dashDateNav">
+        <a onclick="setPrevDate();" class="dashNavPrev"><span class="dashNavIcon"></span></a>
+        <a onclick="setTodayDate();" class="dashNavToday"><span class="dashNavIcon"></span></a>
+        <a onclick="setNextDate();" class="dashNavNext"><span class="dashNavIcon"></span></a>
+        <span class="dashNavDate"></span>
+      </div>
+      <div class="dashEventNav">
+        <a onclick="editLayout();" class="dashNavEdit"><img class="dashNavEventIcon" src="./img/icon/layout-icon.png"></a>
+        <a onclick="refreshLayout();" class="dashNavRefresh"><img class="dashNavEventIcon" src="./img/icon/refresh-icon.png"></a>
+      </div>
+    </div>
+    </div>
+    <div id="dashGrid">
+      <div class="gridItem" id="item1">
+        <div class="gridItemTitle">기간별 데이터</div>
+        <svg width="500" height="300" class="d3Test"></svg>
+      </div>
+      <div class="gridItem" id="item2">
+        <div class="gridItemTitle">하루 15분! 전신 칼로리 불태우는 다이어트 운동</div>
+        <iframe width="500" height="315" src="https://www.youtube.com/embed/swRNeYw1JkY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       <div class="gridItem" id="item3">This is 3 item</div>
       <div class="gridItem" id="item4">This is 4 item</div>
       <div class="gridItem" id="item5">This is 5 item</div>

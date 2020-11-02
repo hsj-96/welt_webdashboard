@@ -1,0 +1,72 @@
+.dashHeader {
+    background-color: #344955;
+    width: 1100px;
+    height: 65px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.dashDateNav {
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 8px 20px;
+    border: 2px solid white;
+    border-radius: 40px;
+    line-height: 20px;
+}
+.dashDateNav > a {
+    width: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+.dashNavIcon {
+    background: url(../img/icon/date-nav-icons.png) no-repeat 0 0;
+    float: left;
+    display: inline;
+    height: 0;
+    overflow: hidden;
+    padding-top: 20px;
+    width: 12px;
+}
+.dashNavPrev .dashNavIcon {
+    background-position: 0px -16px;
+}
+.dashNavPrev .dashNavIcon:hover {
+    background-position: 0px -56px;
+}
+.dashNavNext .dashNavIcon {
+    background-position: 0px -36px;
+}
+.dashNavNext .dashNavIcon:hover {
+    background-position: 0px -76px;
+}
+.dashNavToday .dashNavIcon {
+    background-position: 0px 3px;
+}
+.dashNavDate {
+    margin-left: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 18px;
+    font-size: 18px;
+    color: #fff;
+}
+
+
+
+.dashEventNav {
+    margin-right: 10px;
+}
+.dashEventNav > a {
+    margin: 0 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+.dashNavEventIcon {
+    width: 25px;
+    height: 25px;
+}

@@ -1,33 +1,28 @@
 html, body {
     margin: 0 auto;
     padding: 0 auto;
-    background-color: rgb(242,242,242);
+    background-color: #f2f2f2;
 }
+
 
 header {
-    background-color: cadetblue;
+    background-color: #232F34;
     height: 100px;
 }
-.header-wrapper {
-    width: 1100px;
-    margin: 0 auto;
-    line-height: 100px;
-}
-
 
 nav {
-    background-color: coral;
-    height: 100px;
+    background-color: #F9AA33;
 }
 
+
 section {
-    background-color: darkgreen;
+    background-color: #344955;
 }
+
 
 footer {
     background-color: white;
 }
-
 .footer-wrapper {
     width: 350px;
     margin: 0 auto;
