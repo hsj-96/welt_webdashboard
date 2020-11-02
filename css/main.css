@@ -1,0 +1,35 @@
+html, body {
+    margin: 0 auto;
+    padding: 0 auto;
+    background-color: rgb(242,242,242);
+}
+
+header {
+    background-color: cadetblue;
+    height: 100px;
+}
+.header-wrapper {
+    width: 1100px;
+    margin: 0 auto;
+    line-height: 100px;
+}
+
+
+nav {
+    background-color: coral;
+    height: 100px;
+}
+
+section {
+    background-color: darkgreen;
+}
+
+footer {
+    background-color: white;
+}
+
+.footer-wrapper {
+    width: 350px;
+    margin: 0 auto;
+    padding: 10px 0;
+}

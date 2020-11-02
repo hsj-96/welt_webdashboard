@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Welt Web Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/grid.css">
+  <link rel="stylesheet" href="./css/main.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+  <script src="./js/grid.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-wrapper">
+      <img src="img/welt_logo.webp" style="vertical-align: middle;">
+    </div>
+  </header>
+  
+  <nav>
+    navigation
+  </nav>
+  
+  <section>
+    <div id="gridList" class="list-group">
+      <div class="gridItem" id="item1">This is 1 item</div>
+      <div class="gridItem" id="item2">This is 2 item</div>
+      <div class="gridItem" id="item3">This is 3 item</div>
+      <div class="gridItem" id="item4">This is 4 item</div>
+      <div class="gridItem" id="item5">This is 5 item</div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="footer-wrapper">
+      <div class="footer-email" style="text-align: center;">
+        <a href="mailto:info@weltcorp.com" style="font-size:14px; color:#605E5E; text-decoration: none;">info@weltcorp.com</a>
+      </div>
+      <div class="footer-contact" style="text-align: center; line-height: 60px; height: 60px;">
+        <span style="font-size:42px; font-family: 'Raleway', sans-serif; color:#2D3647;">CONTACT US</span>
+      </div>
+      <div class="footer-copyright" style="text-align: center; margin-bottom: 10px;">
+        <span style="font-size:14px; color:#605E5E;">© 2020 by WELT Corp. All rights reserved.</span>
+      </div>
+      <div class="footer-icon" style="display: flex; justify-content: center; column-gap: 15px;">
+        <img alt="Facebook" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/aebe5b6fd55f471a936c72ff2c8289d7.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/aebe5b6fd55f471a936c72ff2c8289d7.webp">
+        <img alt="YouTube" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/a1fed5f687844a6e8f42e017f71dfcb4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/a1fed5f687844a6e8f42e017f71dfcb4.webp">
+        <img alt="Instagram" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/40898a93cfff4578b1779073137eb1b4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/40898a93cfff4578b1779073137eb1b4.webp">
+      </div>
+    </div>
+  </footer>
+
+  <button onclick="createHandleButton();">create Handle</button>
+  <button onclick="removeHandleButton();">remove Handle</button>
+</body>
+</html>
