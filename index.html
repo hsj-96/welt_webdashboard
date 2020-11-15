@@ -1,118 +1,211 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Welt Web Dashboard</title>
+    <meta charset="utf-8">
+    <title>Welt Web Dashboard</title>   
+    
+    <!--<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>-->
+ 
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/color.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/section.css">
+    <link rel="stylesheet" href="./css/grid.css">
 
-  <link rel="stylesheet" href="./css/main.css">
-  <link rel="stylesheet" href="./css/header.css">
-  <link rel="stylesheet" href="./css/nav.css">
-  <link rel="stylesheet" href="./css/section.css">
-  <link rel="stylesheet" href="./css/grid.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
-  <script src="https://d3js.org/d3.v6.min.js"></script>
-
-  <script src="./js/main.js"></script>
-  <script src="./js/section.js"></script>
-  <script src="./js/grid.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/section.js"></script>
+    <script src="./js/grid.js"></script>
 </head>
-<body>
-  <header>
-    <div class="header-wrapper">
-      <div class="header-logo">
-        <a href="./" target="_self"><img src="img/welt_logo.webp" style="vertical-align: middle; margin-left: 10px;"></a>
-      </div>
-      <div class="header-icon">
-        <div class="header-user">
-          <img src="img/icon/user-icon.png">
-        </div>
-        <div class="user-name">
-          test_ID
-        </div>
-        <div class="header-alarm">
-          <div class="alarm-modal">
-            <div class="alarm-modal-content">
-              <div class="alarm-modal-close">&times;</div>
-              <ul class="alarm-list">
-                <li class="alarm-item">오늘 이동량이 너무 없습니다.</li>
-                <li class="alarm-item">너무 오래 앉아있습니다. 스트레칭 하세요!</li>
-                <li class="alarm-item">폭식 알림</li>
-                <li class="alarm-item">알림</li>
-                <li class="alarm-item">알림</li>
-              </ul>
-            </div>
-          </div>
-          <div class="alarm-num">1</div>
-          <img src="img/icon/alarm-icon.png">
-        </div>
-      </div>
-    </div>
-  </header>
-  
-  <nav>
-    <div class="nav-wrapper">
-      <ul class="nav-container">
-        <li class="nav-item"><a class="nav-selected" href="">대시보드</a></li>
-        <li class="nav-item"><a href="">메뉴2</a></li>
-        <li class="nav-item"><a href="">메뉴3</a></li>
-        <li class="nav-item"><a href="">메뉴4</a></li>
-      </ul>
-    </div>
-  </nav>
-  
-  <section>
-    <div class="dashHeader">
-      <div class="dashDateNav">
-        <a onclick="setPrevDate();" class="dashNavPrev"><span class="dashNavIcon"></span></a>
-        <a onclick="setTodayDate();" class="dashNavToday"><span class="dashNavIcon"></span></a>
-        <a onclick="setNextDate();" class="dashNavNext"><span class="dashNavIcon"></span></a>
-        <span class="dashNavDate"></span>
-      </div>
-      <div class="dashEventNav">
-        <a onclick="editLayout();" class="dashNavEdit"><img class="dashNavEventIcon" src="./img/icon/layout-icon.png"></a>
-        <a onclick="refreshLayout();" class="dashNavRefresh"><img class="dashNavEventIcon" src="./img/icon/refresh-icon.png"></a>
-      </div>
-    </div>
-    </div>
-    <div id="dashGrid">
-      <div class="gridItem" id="item1">
-        <div class="gridItemTitle">기간별 데이터</div>
-        <svg width="500" height="300" class="d3Test"></svg>
-      </div>
-      <div class="gridItem" id="item2">
-        <div class="gridItemTitle">하루 15분! 전신 칼로리 불태우는 다이어트 운동</div>
-        <iframe width="500" height="315" src="https://www.youtube.com/embed/swRNeYw1JkY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-      <div class="gridItem" id="item3">This is 3 item</div>
-      <div class="gridItem" id="item4">This is 4 item</div>
-      <div class="gridItem" id="item5">This is 5 item</div>
-    </div>
-  </section>
-  
-  <footer>
-    <div class="footer-wrapper">
-      <div class="footer-email" style="text-align: center;">
-        <a href="mailto:info@weltcorp.com" style="font-size:14px; color:#605E5E; text-decoration: none;">info@weltcorp.com</a>
-      </div>
-      <div class="footer-contact" style="text-align: center; line-height: 60px; height: 60px;">
-        <span style="font-size:42px; font-family: 'Raleway', sans-serif; color:#2D3647;">CONTACT US</span>
-      </div>
-      <div class="footer-copyright" style="text-align: center; margin-bottom: 10px;">
-        <span style="font-size:14px; color:#605E5E;">© 2020 by WELT Corp. All rights reserved.</span>
-      </div>
-      <div class="footer-icon" style="display: flex; justify-content: center; column-gap: 15px;">
-        <a href="https://www.facebook.com/weltcorp" target="_blank"><img alt="Facebook" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/aebe5b6fd55f471a936c72ff2c8289d7.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/aebe5b6fd55f471a936c72ff2c8289d7.webp"></a>
-        <a href="https://www.youtube.com/channel/UC6JArYKD5SgTMBaiydya6nA" target="_blank"><img alt="YouTube" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/a1fed5f687844a6e8f42e017f71dfcb4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/a1fed5f687844a6e8f42e017f71dfcb4.webp"></a>
-        <a href="https://instagram.com/weltcorp" target="_blank"><img alt="Instagram" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/40898a93cfff4578b1779073137eb1b4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/40898a93cfff4578b1779073137eb1b4.webp"></a>
-      </div>
-    </div>
-  </footer>
 
-  <button onclick="createHandleButton();">create Handle</button>
-  <button onclick="removeHandleButton();">remove Handle</button>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="header-logo">
+                <a href="./" target="_self"><img src="img/welt_logo_black.png" style="vertical-align: middle; margin-left: 10px;"></a>
+            </div>
+            <div class="header-icon">
+                <div class="header-user">
+                    <img src="img/icon/user-icon-black.png">
+                </div>
+                <div class="user-name">
+                    test_ID
+                </div>
+                <div class="header-alarm">
+                    <div class="alarm-modal">
+                        <div class="alarm-modal-content">
+                            <div class="alarm-modal-close">&times;</div>
+                                <ul class="alarm-list">
+                                    <li class="alarm-item">오늘 이동량이 너무 없습니다.</li>
+                                    <li class="alarm-item">너무 오래 앉아있습니다. 스트레칭 하세요!</li>
+                                    <li class="alarm-item">폭식 알림</li>
+                                    <li class="alarm-item">알림</li>
+                                    <li class="alarm-item">알림</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alarm-num">1</div>
+                        <img src="img/icon/alarm-icon-black.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <!--
+        <div class="nav-wrapper">
+            <ul class="nav-container">
+                <li class="nav-item"><a class="nav-selected" href="">대시보드</a></li>
+                <li class="nav-item"><a href="">메뉴2</a></li>
+                <li class="nav-item"><a href="">메뉴3</a></li>
+                <li class="nav-item"><a href="">메뉴4</a></li>
+            </ul>
+        </div>
+        -->
+    </nav>
+  
+    <section>
+        <div class="dashHeader">
+            <div class="dashDateNav">
+                <span class="todayDate"></span>
+            </div>
+            <div class="dashEventNav">
+                <a onclick="editLayout();" class="dashNavEdit"><img class="dashNavEventIcon" src="./img/icon/layout-icon-black.png"></a>
+                <a onclick="refreshLayout();" class="dashNavRefresh"><img class="dashNavEventIcon" src="./img/icon/refresh-icon-black.png"></a>
+            </div>
+        </div>
+        <div id="dashGrid">
+            <div class="gridItem" id="item1">
+                <div class="grid-header">기간별 데이터</div>
+                <div class="grid-section">
+                    <div class="graph-wrapper">
+                        <div class="swiper-button-prev item-1"></div>
+                        <div class="swiper-container item-1">
+                            <div class="swiper-wrapper item-1">
+                                <div class="swiper-slide item-1">
+                                    <div id="tooltip" class="hidden">
+                                        <p><b id="value"></b></p>
+                                    </div>
+                                    <svg width="500" height="250" class="d3Test"></svg>
+                                </div>
+                                <div class="swiper-slide item-1">
+
+                                </div>
+                                <div class="swiper-slide item-1">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next item-1"></div>
+                    </div>
+                    <div class="graph-menu">
+                        <div class="graph-radio-wrapper">
+                            <input type="radio" id="walk" name="graphmenu" value="walk" checked>
+                            <label for="walk">걸음수</label>
+                        </div>
+                        <div class="graph-radio-wrapper">
+                            <input type="radio" id="waist" name="graphmenu" value="waist">
+                            <label for="waist">허리둘레</label>
+                        </div>
+                        <div class="graph-radio-wrapper">
+                            <input type="radio" id="overeating" name="graphmenu" value="overeating">
+                            <label for="overeating">과식</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-timerate-wrapper">
+                    <div class="timerate checked" id="rate-day">요일별</div>
+                    <div class="timerate" id="rate-week">주간별</div>
+                    <div class="timerate" id="rate-month">월별</div>
+                </div>
+            </div>
+            <div class="gridItem" id="item2">
+                <div class="grid-header">소모 칼로리</div>
+                <div class="grid-section">
+                </div>
+            </div>
+            <div class="gridItem" id="item3">
+                <div class="grid-header">과식 여부</div>
+                <div class="grid-section">
+                </div>
+            </div>
+            <div class="gridItem" id="item4">
+                <div class="grid-header">걸음 수/걸은 거리</div>
+                <div class="grid-section">
+                </div>
+            </div>
+            <div class="gridItem" id="item5">
+                <div class="grid-header">오늘의 랭킹</div>
+                <div class="grid-section">
+                    <div class="swiper-container item-5">
+                        <div class="swiper-wrapper item-5">
+                            <div class="swiper-slide item-5">wrapper1</div>
+                            <div class="swiper-slide item-5">wrapper2</div>
+                            <div class="swiper-slide item-5">wrapper3</div>
+                        </div>
+                    </div>
+                    <div class="swiper-descripton item-5">
+                        <div class="swiper-button-section item-5">
+                            <div class="swiper-button-prev item-5"></div>
+                            <div class="swiper-button-menu item-5">허리 둘레</div>
+                            <div class="swiper-button-next item-5"></div>
+                        </div>
+                        <div class="user-rank">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gridItem" id="item6">
+                <div class="grid-header">운동 정보</div>
+                <div class="grid-section">
+                </div>
+            </div>
+            
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+            <div class="gridItem" id="item_dummy"></div>
+        </div>
+    </section>
+  
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-email" style="text-align: center;">
+                <a href="mailto:info@weltcorp.com" style="font-size:14px; color:#605E5E; text-decoration: none;">info@weltcorp.com</a>
+            </div>
+            <div class="footer-contact" style="text-align: center; line-height: 60px; height: 60px;">
+                <span style="font-size:42px; font-family: 'Raleway', sans-serif; color:#2D3647;">CONTACT US</span>
+            </div>
+            <div class="footer-copyright" style="text-align: center; margin-bottom: 10px;">
+                <span style="font-size:14px; color:#605E5E;">© 2020 by WELT Corp. All rights reserved.</span>
+            </div>
+            <div class="footer-icon" style="display: flex; justify-content: center; column-gap: 15px;">
+                <a href="https://www.facebook.com/weltcorp" target="_blank"><img alt="Facebook" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/aebe5b6fd55f471a936c72ff2c8289d7.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/aebe5b6fd55f471a936c72ff2c8289d7.webp"></a>
+                <a href="https://www.youtube.com/channel/UC6JArYKD5SgTMBaiydya6nA" target="_blank"><img alt="YouTube" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/a1fed5f687844a6e8f42e017f71dfcb4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/a1fed5f687844a6e8f42e017f71dfcb4.webp"></a>
+                <a href="https://instagram.com/weltcorp" target="_blank"><img alt="Instagram" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/40898a93cfff4578b1779073137eb1b4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/40898a93cfff4578b1779073137eb1b4.webp"></a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

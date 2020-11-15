@@ -14,38 +14,9 @@ function setTodayDate() {
     const day = currentDate.getDay();
     const dayName = ["일", "월", "화", "수", "목", "금", "토"];
 
-    const gridItems = document.querySelector(".dashNavDate");
+    const gridItems = document.querySelector(".todayDate");
     gridItems.innerHTML = `${year}. ${month}. ${date}. (${dayName[day]})`
 }
-
-function setPrevDate() {
-    const prevDate = currentDate.getTime() - (1 * 24 * 60 * 60 * 1000);
-    currentDate.setTime(prevDate);
-
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    const date = currentDate.getDate();
-    const day = currentDate.getDay();
-    const dayName = ["일", "월", "화", "수", "목", "금", "토"];
-
-    const gridItems = document.querySelector(".dashNavDate");
-    gridItems.innerHTML = `${year}. ${month}. ${date}. (${dayName[day]})`
-}
-
-function setNextDate() {
-    const nextDate = currentDate.getTime() + (1 * 24 * 60 * 60 * 1000);
-    currentDate.setTime(nextDate);
-
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    const date = currentDate.getDate();
-    const day = currentDate.getDay();
-    const dayName = ["일", "월", "화", "수", "목", "금", "토"];
-
-    const gridItems = document.querySelector(".dashNavDate");
-    gridItems.innerHTML = `${year}. ${month}. ${date}. (${dayName[day]})`
-}
-
 // ==================================================
 
 // ========== 커스터마이징 기능 ==========
@@ -65,7 +36,7 @@ function createHandleButton() {
     gridItems.forEach(function(gridItem) {
         const handle= document.createElement('img');
         handle.className = "handle";
-        handle.src = "/img/edit_arrow.png";
+        handle.src = "./img/edit_arrow.png";
         gridItem.appendChild(handle);
     });
 
@@ -79,7 +50,7 @@ function removeHandleButton() {
     });
 
     const editButton = document.querySelector(".dashNavEventIcon");
-    editButton.src = "./img/icon/layout-icon.png";
+    editButton.src = "./img/icon/layout-icon-black.png";
 }
 // ==================================================
 
