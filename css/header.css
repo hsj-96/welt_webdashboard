@@ -47,7 +47,7 @@
 .alarm-modal {
     display: none;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     left: -470px;
     top: 75px;
     width: 500px;

@@ -2,29 +2,23 @@ function foo() {
     console.log('this is foo');
 }
 
-const youtube_search = {
-    muscle : [
-        { 
+const youtube_search = [
+    { 
         title : "근육 운동",
         link : "https://www.youtube.com/results?search_query=%EA%B7%BC%EC%9C%A1+%EC%9A%B4%EB%8F%99" 
-        }
-    ],
-    diet : [
-        { 
+    },
+    { 
         title : "다이어트 운동",
         link : "https://www.youtube.com/results?search_query=%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8+%EC%9A%B4%EB%8F%99" 
-        }
-    ],
-    stretching : [
-        { 
-            title : "스트레칭",
-            link : "https://www.youtube.com/results?search_query=%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%B9%AD" 
-        }
-    ]
-};
+    },
+    { 
+        title : "스트레칭",
+        link : "https://www.youtube.com/results?search_query=%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%B9%AD" 
+    }
+];
 
-const youtube_info = {
-    muscle : [
+const youtube_info = [
+    [ // 근육 운동
         { 
             title : "최고의 전신 근력운동 BEST5",
             link : "https://www.youtube.com/embed/Iaa8YNDRbhg" 
@@ -38,7 +32,7 @@ const youtube_info = {
             link : "https://www.youtube.com/embed/PjGcOP-TQPE" 
         }
     ],
-    diet : [
+    [ // 다이어트 운동
         { 
             title : "하루 15분! 전신 칼로리 불태우는 다이어트 운동",
             link : "https://www.youtube.com/embed/swRNeYw1JkY" 
@@ -52,7 +46,7 @@ const youtube_info = {
             link : "https://www.youtube.com/embed/Q70jQVPkMnc" 
         }
     ],
-    stretching : [
+    [ // 스트레칭
         { 
             title : "하체 스트레칭 이거 하나로 끝! [날하스]",
             link : "https://www.youtube.com/embed/--MMq6I07b4" 
@@ -66,4 +60,4 @@ const youtube_info = {
             link : "https://www.youtube.com/embed/u94SQdRpHyc" 
         }
     ]
-};
+];

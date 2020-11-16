@@ -65,16 +65,6 @@
     </header>
 
     <nav>
-        <!--
-        <div class="nav-wrapper">
-            <ul class="nav-container">
-                <li class="nav-item"><a class="nav-selected" href="">대시보드</a></li>
-                <li class="nav-item"><a href="">메뉴2</a></li>
-                <li class="nav-item"><a href="">메뉴3</a></li>
-                <li class="nav-item"><a href="">메뉴4</a></li>
-            </ul>
-        </div>
-        -->
     </nav>
   
     <section>
@@ -92,39 +82,32 @@
                 <div class="grid-header">기간별 데이터</div>
                 <div class="grid-section">
                     <div class="graph-wrapper">
-                        <div class="swiper-button-prev item-1"></div>
+                        <!--<div class="swiper-button-prev item-1"></div>-->
                         <div class="swiper-container item-1">
                             <div class="swiper-wrapper item-1">
                                 <div class="swiper-slide item-1">
-                                    <div id="tooltip" class="hidden">
+                                    <div id="tooltip" class="hidden menu1">
                                         <p><b id="value"></b></p>
                                     </div>
-                                    <svg width="500" height="250" class="d3Test"></svg>
+                                    <svg width="500" height="250" class="d3-graph menu1"></svg>
                                 </div>
                                 <div class="swiper-slide item-1">
-
+                                    <div id="tooltip" class="hidden menu2">
+                                        <p><b id="value"></b></p>
+                                    </div>
+                                    <svg width="500" height="250" class="d3-graph menu2"></svg>
                                 </div>
                                 <div class="swiper-slide item-1">
-                                    
+                                    <div id="tooltip" class="hidden menu3">
+                                        <p><b id="value"></b></p>
+                                    </div>
+                                    <svg width="500" height="250" class="d3-graph menu3"></svg>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-button-next item-1"></div>
+                        <!--<div class="swiper-button-next item-1"></div>-->
                     </div>
-                    <div class="graph-menu">
-                        <div class="graph-radio-wrapper">
-                            <input type="radio" id="walk" name="graphmenu" value="walk" checked>
-                            <label for="walk">걸음수</label>
-                        </div>
-                        <div class="graph-radio-wrapper">
-                            <input type="radio" id="waist" name="graphmenu" value="waist">
-                            <label for="waist">허리둘레</label>
-                        </div>
-                        <div class="graph-radio-wrapper">
-                            <input type="radio" id="overeating" name="graphmenu" value="overeating">
-                            <label for="overeating">과식</label>
-                        </div>
-                    </div>
+                    <div class="graph-menu"></div>
                 </div>
                 <div class="graph-timerate-wrapper">
                     <div class="timerate checked" id="rate-day">요일별</div>
@@ -135,16 +118,30 @@
             <div class="gridItem" id="item2">
                 <div class="grid-header">소모 칼로리</div>
                 <div class="grid-section">
+                    <div class="kcal-section"></div>
                 </div>
             </div>
             <div class="gridItem" id="item3">
                 <div class="grid-header">과식 여부</div>
                 <div class="grid-section">
+                    <div class="overeating-section">
+                        <hr class="overeating-hr">
+                        <div class="overeating-value"></div>
+                        <div class="overeating-notice-wrapper">
+                            <div><div class="overeating-notice"></div><div>양호</div></div>
+                            <div><div class="overeating-notice"></div><div>관심</div></div>
+                            <div><div class="overeating-notice"></div><div>주의</div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="gridItem" id="item4">
                 <div class="grid-header">걸음 수/걸은 거리</div>
                 <div class="grid-section">
+                    <div class="walk-section">
+                        <div class="walk-value"></div>
+                        <div class="walk-distance"></div>
+                    </div>
                 </div>
             </div>
             <div class="gridItem" id="item5">
@@ -152,18 +149,23 @@
                 <div class="grid-section">
                     <div class="swiper-container item-5">
                         <div class="swiper-wrapper item-5">
-                            <div class="swiper-slide item-5">wrapper1</div>
-                            <div class="swiper-slide item-5">wrapper2</div>
-                            <div class="swiper-slide item-5">wrapper3</div>
+                            <div class="swiper-slide item-5"></div>
+                            <div class="swiper-slide item-5"></div>
+                            <div class="swiper-slide item-5"></div>
                         </div>
                     </div>
-                    <div class="swiper-descripton item-5">
+                    <div class="swiper-description item-5">
                         <div class="swiper-button-section item-5">
                             <div class="swiper-button-prev item-5"></div>
-                            <div class="swiper-button-menu item-5">허리 둘레</div>
+                            <div class="swiper-button-menu item-5">걸음수</div>
                             <div class="swiper-button-next item-5"></div>
                         </div>
+                        <div class="user-rank-flag">
+                            상위 ???% + (어떤멘트 추가)
+                        </div>
                         <div class="user-rank">
+                            <div><img src="img/icon/user-icon-black.png">&nbsp;test_ID</div>
+                            <div>프로필 설명</div>
                         </div>
                     </div>
                 </div>
@@ -171,12 +173,12 @@
             <div class="gridItem" id="item6">
                 <div class="grid-header">운동 정보</div>
                 <div class="grid-section">
+                    <div class="info-section">
+
+                    </div>
                 </div>
             </div>
             
-            <div class="gridItem" id="item_dummy"></div>
-            <div class="gridItem" id="item_dummy"></div>
-            <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
