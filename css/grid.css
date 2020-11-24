@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    color: white;
+    color: var(--grid-font-color);
 }
 
 .handle {
@@ -62,7 +62,7 @@
 
 }
 #item6 {
-    grid-row: span 3;
+    grid-row: span 2;
     grid-column: span 3;
 }
 
@@ -89,6 +89,21 @@
 .graph-wrapper {
     width: 600px;
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.graph-button-prev, .graph-button-next {
+    font-size: 40px;
+    color: black;
+    cursor: pointer;
+}
+.graph-date-info {
+    position: absolute;
+    top: 2px;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
 }
 
 .graph-menu {
@@ -128,6 +143,7 @@
     height: 250px;
     border-radius: 5px;
     color: black;
+    margin: 0;
 }
 .swiper-slide.item-1 {
     text-align: center;
@@ -240,13 +256,24 @@
     font-size: 20px;
 }
 
-.user-rank-flag{
-    background-color: white;
+.user-rank-flag {
     width: 100%;
     height: 40%;
     border-radius: 5px;
     color: var(--my-color-black);
-    font-size: 14px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.user-rank-flag img {
+    width: 50px;
+    height: 50px;
+}
+.rank-icon-section {
+    display: flex;
+    align-items: center;
 }
 
 .user-rank {
@@ -254,7 +281,7 @@
     width: 100%;
     height: 40%;
     border-radius: 5px;
-    color: var(--my-color-black);
+    color: black;
     font-size: 20px;
     display: flex;
     flex-direction: column;
@@ -270,7 +297,7 @@
 
 /* ------------------ 칼로리 ------------------ */
 .kcal-section {
-    color: var(--my-color-black);
+    color: black;
     font-size: 30px;
     font-weight: bolder;
     text-align: center;
@@ -325,7 +352,7 @@
 /* ------------------ 걸음 수 / 걸은 거리 ------------------ */
 .walk-section {
     width: 100%;
-    color: var(--my-color-black);
+    color: black;
     font-size: 30px;
     font-weight: bolder;
     text-align: center;
@@ -333,10 +360,15 @@
 /* ----------------------------------------- */
 
 /* ------------------ 운동 정보 ------------------ */
+#item6 > .grid-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 .info-section {
-    width: 100%;
-    height: 470px;
-    color: var(--my-color-black);
+    width: 80%;
+    color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -347,10 +379,16 @@
     margin-bottom: 10px;
 }
 .info-text {
-    margin: 10px;
+    margin: 0px;
+    font-size: 12px;
 }
 .info-search-link {
-    color: darkblue;
-    font-size: 20px;
+    font-size: 17px;
+}
+
+.info-prev, .info-next {
+    font-size: 40px;
+    color: black;
+    cursor: pointer;
 }
 /* ----------------------------------------- */

@@ -48,14 +48,14 @@
     display: none;
     position: absolute;
     z-index: 2;
-    left: -470px;
-    top: 75px;
+    left: -487px;
+    top: 55px;
     width: 500px;
 }
   
 .alarm-modal-content {
     background-color: #fefefe;
-    padding: 20px;
+    padding: 10px 10px 1px 10px;
     border-radius: 5px;
 }
 
@@ -63,9 +63,9 @@
     width: 20px;
     float: right;
     color: #aaa;
-    font-size: 28px;
+    font-size: 15px;
     font-weight: bold;
-    line-height: 10px;
+    line-height: 5px;
 }
 
 .alarm-modal-close:hover,
@@ -78,13 +78,15 @@
 .alarm-list {
     border-top: 1px solid var(--my-color-black);
     list-style-type: none;
-    margin-top: 30px;
+    margin-top: 18px;
     padding: 0;
 }
 
 .alarm-item {
-    line-height: 80px;
+    line-height: 50px;
     font-family: 'Noto Sans KR', sans-serif;
     padding: 0 10px;
     border-bottom: 1px solid gray;
+    font-size: 12px;
+    color: black;
 }

@@ -58,3 +58,7 @@ function refreshLayout() { // 데이터 갱신
     alert("데이터 갱신 버튼");
 }
 
+function shareInfo() { // 공유버튼
+    alert("공유 버튼");
+}
+

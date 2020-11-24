@@ -50,9 +50,9 @@
                                 <ul class="alarm-list">
                                     <li class="alarm-item">오늘 이동량이 너무 없습니다.</li>
                                     <li class="alarm-item">너무 오래 앉아있습니다. 스트레칭 하세요!</li>
-                                    <li class="alarm-item">폭식 알림</li>
-                                    <li class="alarm-item">알림</li>
-                                    <li class="alarm-item">알림</li>
+                                    <li class="alarm-item">과식은 몸에 좋지 않아요!</li>
+                                    <li class="alarm-item">너무 오래 앉아있습니다. 스트레칭 하세요!</li>
+                                    <li class="alarm-item">너무 오래 앉아있습니다. 스트레칭 하세요!</li>
                                 </ul>
                             </div>
                         </div>
@@ -75,6 +75,7 @@
             <div class="dashEventNav">
                 <a onclick="editLayout();" class="dashNavEdit"><img class="dashNavEventIcon" src="./img/icon/layout-icon-black.png"></a>
                 <a onclick="refreshLayout();" class="dashNavRefresh"><img class="dashNavEventIcon" src="./img/icon/refresh-icon-black.png"></a>
+                <a onclick="shareInfo();" class="dashNavShare"><img class="dashNavEventIcon" src="./img/icon/share-icon-black.png"></a>
             </div>
         </div>
         <div id="dashGrid">
@@ -82,8 +83,9 @@
                 <div class="grid-header">기간별 데이터</div>
                 <div class="grid-section">
                     <div class="graph-wrapper">
-                        <!--<div class="swiper-button-prev item-1"></div>-->
+                        <div class="graph-button-prev">&#10094;</div>
                         <div class="swiper-container item-1">
+                            <div class="graph-date-info"></div>
                             <div class="swiper-wrapper item-1">
                                 <div class="swiper-slide item-1">
                                     <div id="tooltip" class="hidden menu1">
@@ -105,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="swiper-button-next item-1"></div>-->
+                        <div class="graph-button-next">&#10095;</div>
                     </div>
                     <div class="graph-menu"></div>
                 </div>
@@ -161,7 +163,8 @@
                             <div class="swiper-button-next item-5"></div>
                         </div>
                         <div class="user-rank-flag">
-                            상위 ???% + (어떤멘트 추가)
+                            <div class="rank-summary">좀 더 분발하세요 !</div>
+                            <div class="rank-icon-section"><img src="img/icon/flag.png">&nbsp; <span>상위 30%</span></div>
                         </div>
                         <div class="user-rank">
                             <div><img src="img/icon/user-icon-black.png">&nbsp;test_ID</div>
@@ -173,12 +176,14 @@
             <div class="gridItem" id="item6">
                 <div class="grid-header">운동 정보</div>
                 <div class="grid-section">
+                    <div class="info-prev">&#10094;</div>
                     <div class="info-section">
 
                     </div>
+                    <div class="info-next">&#10095;</div>
                 </div>
             </div>
-            
+            <!--
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
@@ -188,6 +193,7 @@
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
+            -->
         </div>
     </section>
   

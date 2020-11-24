@@ -1,4 +1,19 @@
+let graphDate = new Date();
+let todayUserData = {
+    calorie : 1000,
+    step : 1205,
+    distance : 2.1,
+    overeating : 3, 
+    waist : 23
+};
+
+function getTodayUserData(userid) {
+    // 임시 //
+} 
+
 window.addEventListener('DOMContentLoaded', function() {
+    getTodayUserData(123);
+
     Sortable.create(dashGrid, { 
         handle: '.handle',
         swapThreshold: 1,
@@ -40,6 +55,8 @@ window.addEventListener('DOMContentLoaded', function() {
     initGraphSection();
     addTimeRateClickEvent();
     addMenuClickEvent();
+    addChangeTimeEvent();
+    initGraphTime();
     // ================== 
 
     // ====== 랭킹 ====== 
@@ -81,7 +98,7 @@ function initGraphSection() {
         }
     ];*/
 
-    const dataset = getGraphData(null, 0);
+    const dataset = getGraphData(new Date(), null, 0);
 
     // 처음 화면에 보여지는 걸음수||허리둘레||과식 별 데이터를 설정
     dataset.forEach(function(d, i) {
@@ -99,6 +116,7 @@ function addMenuClickEvent() {
             document.querySelector('.swiper-pagination-bullet-active').classList.toggle('swiper-pagination-bullet-active');
             el.classList.toggle('swiper-pagination-bullet-active');
             changeGraphTimeRate('rate-day');
+            initGraphTime();
         });
     });
 }
@@ -111,6 +129,7 @@ function addTimeRateClickEvent() {
             document.querySelector('.timerate.checked').className = 'timerate';
             el.className = 'timerate checked';
             changeGraphTimeRate(el.id);
+            changeGraphInfoFromTimeRate(el.id);
         });
     });
 }
@@ -145,7 +164,7 @@ function changeGraphTimeRate(elementId) {
         }
     ];*/
 
-    const dataset = getGraphData(menu, null);
+    const dataset = getGraphData(new Date(), menu, null);
 
     const svg = document.querySelector(`.d3-graph.${menu}`); 
     while(svg.hasChildNodes()) { 
@@ -153,6 +172,164 @@ function changeGraphTimeRate(elementId) {
     }
     createGraphInfo(dataset[timerate], menu);
 }
+
+function addChangeTimeEvent() {
+    const prevButtonEl = document.querySelector('.graph-button-prev');
+    const nextButtonEl = document.querySelector('.graph-button-next');
+
+    prevButtonEl.addEventListener('click', function() {
+        const timerate = document.querySelector('.timerate.checked').id;
+
+        switch(timerate) {
+            case 'rate-day': {
+                lastWeek();
+                setGraphTime();
+            } break;
+            case 'rate-week': {
+                lastMonth();
+                setGraphTime();
+            } break;
+            case 'rate-month': {
+                lastYear();
+                setGraphTime();
+            } break;
+        }
+    });
+
+    nextButtonEl.addEventListener('click', function() {
+        const timerate = document.querySelector('.timerate.checked').id;
+
+        switch(timerate) {
+            case 'rate-day': {
+                nextWeek();
+                setGraphTime();
+            } break;
+            case 'rate-week': {
+                nextMonth();
+                setGraphTime();
+            } break;
+            case 'rate-month': {
+                nextYear();
+                setGraphTime();
+            } break;
+        }
+    });
+}
+
+function initGraphTime() {
+    graphDate = new Date();
+    
+    const graphDateInfoEl = document.querySelector('.graph-date-info');
+
+    const first_day = getSettingDate(graphDate, graphDate.getDay()*(-1)); 
+    const last_day  = getSettingDate(graphDate, 6-graphDate.getDay()); 
+
+    graphDateInfoEl.innerText = `${first_day.year}.${first_day.month}.${first_day.day} ~ ${last_day.year}.${last_day.month}.${last_day.day}`;
+}
+
+function setGraphTime() {
+    const graphDateInfoEl = document.querySelector('.graph-date-info');
+    const timerate = document.querySelector('.timerate.checked').id;
+
+    switch(timerate) {
+        case 'rate-day': {
+            const first_day = getSettingDate(graphDate, graphDate.getDay()*(-1)); 
+            const last_day  = getSettingDate(graphDate, 6-graphDate.getDay()); 
+            graphDateInfoEl.innerText = `${first_day.year}.${first_day.month}.${first_day.day} ~ ${last_day.year}.${last_day.month}.${last_day.day}`;
+        } break;
+        case 'rate-week': {
+            const day = getDateStr(graphDate);
+            graphDateInfoEl.innerText = `${day.year}-${day.month}월`;
+        } break;
+        case 'rate-month': {
+            const day = getDateStr(graphDate);
+            graphDateInfoEl.innerText = `${day.year}년`;
+        } break;
+    }
+    
+}
+
+function changeGraphInfoFromTimeRate(elementId) {
+    const graphDateInfoEl = document.querySelector('.graph-date-info');
+
+    switch(elementId) {
+        case 'rate-day': {
+            initGraphTime();
+        } break;
+        case 'rate-week': {
+            initGraphTime();
+            const day = getDateStr(graphDate);
+            graphDateInfoEl.innerText = `${day.year}-${day.month}월`;
+        } break;
+        case 'rate-month': {
+            initGraphTime();
+            const day = getDateStr(graphDate);
+            graphDateInfoEl.innerText = `${day.year}년`;
+        } break;
+    }
+}
+
+function getDateStr(myDate){
+	const year = myDate.getFullYear();
+	let month = (myDate.getMonth() + 1);
+	let day = myDate.getDate();
+	
+	month = (month < 10) ? "0" + String(month) : month;
+	day = (day < 10) ? "0" + String(day) : day;
+	
+    return { 
+        year : year,
+        month : month,
+        day : day 
+    };
+}
+
+function getSettingDate(date, value) {
+    const tmpDate = new Date(date.getTime());
+    
+    const dayOfMonth = tmpDate.getDate();
+    tmpDate.setDate(dayOfMonth + value);
+    
+    return getDateStr(tmpDate);
+}
+
+function lastWeek() {
+    const dayOfMonth = graphDate.getDate();
+    graphDate.setDate(dayOfMonth - 7);
+    
+    return getDateStr(graphDate);
+}
+function nextWeek() {
+    const dayOfMonth = graphDate.getDate();
+    graphDate.setDate(dayOfMonth + 7);
+    
+    return getDateStr(graphDate);
+}
+function lastMonth() {
+    const monthOfYear = graphDate.getMonth();
+    graphDate.setMonth(monthOfYear - 1);
+   
+    return getDateStr(graphDate);
+}
+function nextMonth() {
+    const monthOfYear = graphDate.getMonth();
+    graphDate.setMonth(monthOfYear + 1);
+    
+    return getDateStr(graphDate);
+}
+function lastYear() {
+    const year = graphDate.getFullYear();
+    graphDate.setFullYear(year - 1);
+   
+    return getDateStr(graphDate);
+}
+function nextYear() {
+    const year = graphDate.getFullYear();
+    graphDate.setFullYear(year + 1);
+    
+    return getDateStr(graphDate);
+}
+
 
 function createGraphInfo(dataset, menu) {
     const data = dataset.data;
@@ -242,7 +419,7 @@ function createGraphInfo(dataset, menu) {
         });
 }
 
-function getGraphData(menu, timerate) { // menu1, menu2, menu3, 0,1,2
+function getGraphData(time, menu, timerate) { // menu1, menu2, menu3, 0,1,2
     const dataset = {
         "menu1" : [
             { // 걸음수 데이터(요일별)
@@ -442,7 +619,7 @@ function initKcalSection() {
     const kcalSectionEl = document.querySelector('.kcal-section');
     
     // *** 하단의 데이터를 함수로 받아와야함 ***
-    const userdata = 1000;
+    const userdata = todayUserData.calorie;
 
     kcalSectionEl.innerHTML = `${userdata}kcal`;
 }
@@ -453,7 +630,7 @@ function initOvereatingSection() {
     const overeatingValueEl = document.querySelector('.overeating-value');
     const overeatingNoticeEl = document.querySelectorAll('.overeating-notice');
     // *** 하단의 데이터를 함수로 받아와야함 ***
-    const userdata = { value : 3, status : 2}; // status => 0 : 양호 | 1 : 관심 | 2 : 주의
+    const userdata = { value : todayUserData.overeating, status : 2}; // status => 0 : 양호 | 1 : 관심 | 2 : 주의
 
     overeatingValueEl.innerHTML = `${userdata.value}회`;
     overeatingNoticeEl[userdata.status].classList.toggle('active');
@@ -466,7 +643,7 @@ function initWalkSection() {
     const walkDistanceSectionEl = document.querySelector('.walk-distance');
     
     // *** 하단의 데이터를 함수로 받아와야함 ***
-    const userdata = { value : 1205, distance : 2.1 };
+    const userdata = { value : todayUserData.step, distance : todayUserData.distance };
 
     walkValueSectionEl.innerHTML = `걸음 수 : ${userdata.value} 걸음`;
     walkDistanceSectionEl.innerHTML = `걸은 거리 : ${userdata.distance} km`;
@@ -474,24 +651,60 @@ function initWalkSection() {
 // ==================================================================
 
 // ============================= 운동 정보 =============================
+let videoNum = 0;
 function initYoutubeInfo() {
     const infoSectionEl = document.querySelector('.info-section');
     
     // *** 하단의 데이터를 함수로 받아와야함 ***
     const userdata = { status : 1, text : `이번주 test_ID 님의 허리둘레가 1인치 증가했어요.<br>
-    운동을 통해서 체중조절을 해보세요.` }; // status => 0 : 근육 | 1 : 다이어트 | 2 : 스트레칭
+    이 운동이 날씬한 허리라인을 만들어 줄 거에요.` }; // status => 0 : 근육 | 1 : 다이어트 | 2 : 스트레칭
 
     const info = youtube_info[userdata.status];
     const search = youtube_search[userdata.status];
-    const randNum = Math.floor(Math.random()*3);
+    //const randNum = Math.floor(Math.random()*3);
+    videoNum = 1;
 
+    document.querySelector('#item6 > .grid-header').innerHTML = `${info[videoNum].title}`;
+    
+    //<div class="info-header">${info[randNum].title}</div>
     const innerhtml = `
-        <div class="info-header">${info[randNum].title}</div>
-        <iframe width="400" height="225" src="${info[randNum].link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="400" height="225" src="${info[videoNum].link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="info-text">${userdata.text}</div>
-        <a class="info-search-link" href="${search.link}" target="_blank">> 더 많은 동영상 보러가기</a>
+        <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">허리둘레</span> 운동 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
     `;
 
     infoSectionEl.innerHTML = innerhtml;
+
+
+    const prevEl = document.querySelector('.info-prev');
+    const nextEl = document.querySelector('.info-next');
+
+    prevEl.addEventListener('click', function() {
+        if(videoNum == 0) { videoNum = 2; }
+        else { videoNum--; }
+
+        document.querySelector('#item6 > .grid-header').innerHTML = `${info[videoNum].title}`;
+        const innerhtml = `
+            <iframe width="400" height="225" src="${info[videoNum].link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="info-text">${userdata.text}</div>
+            <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">허리둘레</span> 운동 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
+        `;
+
+        infoSectionEl.innerHTML = innerhtml;
+    });
+
+    nextEl.addEventListener('click', function() {
+        if(videoNum == 2) { videoNum = 0; }
+        else { videoNum++; }
+
+        document.querySelector('#item6 > .grid-header').innerHTML = `${info[videoNum].title}`;
+        const innerhtml = `
+            <iframe width="400" height="225" src="${info[videoNum].link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="info-text">${userdata.text}</div>
+            <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">허리둘레</span> 운동 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
+        `;
+
+        infoSectionEl.innerHTML = innerhtml;
+    });
 }
 // ==================================================================
