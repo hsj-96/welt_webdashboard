@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
     <meta charset="utf-8">
     <title>Welt Web Dashboard</title>   
     
     <!--<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>-->
- 
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>-->
+        
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./css/color.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/nav.css">
-    <link rel="stylesheet" href="./css/section.css">
-    <link rel="stylesheet" href="./css/grid.css">
+        <link rel="stylesheet" href="./css/color.css">
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/header.css">
+        <link rel="stylesheet" href="./css/nav.css">
+        <link rel="stylesheet" href="./css/section.css">
+        <link rel="stylesheet" href="./css/grid.css">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
 
-    <script src="./js/main.js"></script>
-    <script src="./js/data.js"></script>
-    <script src="./js/section.js"></script>
-    <script src="./js/grid.js"></script>
-</head>
+        <script src="./back_welt.js?after"></script>
 
-<body>
-    <header>
-        <div class="header-wrapper">
-            <div class="header-logo">
-                <a href="./" target="_self"><img src="img/welt_logo_black.png" style="vertical-align: middle; margin-left: 10px;"></a>
-            </div>
-            <div class="header-icon">
-                <div class="header-user">
-                    <img src="img/icon/user-icon-black.png">
+        <script src="./js/main.js"></script>
+        <script src="./js/data.js"></script>
+        <script src="./js/section.js"></script>
+        <script src="./js/grid.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div class="header-wrapper">
+                <div class="header-logo">
+                    <a href="./" target="_self"><img src="img/welt_logo_black.png" style="vertical-align: middle; margin-left: 10px;"></a>
                 </div>
-                <div class="user-name">
-                    test_ID
-                </div>
-                <div class="header-alarm">
-                    <div class="alarm-modal">
-                        <div class="alarm-modal-content">
-                            <div class="alarm-modal-close">&times;</div>
+                <div class="header-icon">
+                    <div class="header-user">
+                        <img src="img/icon/user-icon-black.png">
+                    </div>
+                    <div class="user-name">
+                        test_ID
+                    </div>
+                    <!--<div class="header-alarm">
+                        <div class="alarm-modal">
+                            <div class="alarm-modal-content">
+                                <div class="alarm-modal-close">&times;</div>
                                 <ul class="alarm-list">
                                     <li class="alarm-item">오늘 이동량이 너무 없습니다.</li>
                                     <li class="alarm-item">너무 오래 앉아있습니다. 스트레칭 하세요!</li>
@@ -58,7 +61,7 @@
                         </div>
                         <div class="alarm-num">1</div>
                         <img src="img/icon/alarm-icon-black.png">
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -66,7 +69,7 @@
 
     <nav>
     </nav>
-  
+    
     <section>
         <div class="dashHeader">
             <div class="dashDateNav">
@@ -124,7 +127,7 @@
                 </div>
             </div>
             <div class="gridItem" id="item3">
-                <div class="grid-header">과식 여부</div>
+                <div class="grid-header">앉은 시간</div>
                 <div class="grid-section">
                     <div class="overeating-section">
                         <hr class="overeating-hr">
@@ -163,12 +166,12 @@
                             <div class="swiper-button-next item-5"></div>
                         </div>
                         <div class="user-rank-flag">
-                            <div class="rank-summary">좀 더 분발하세요 !</div>
-                            <div class="rank-icon-section"><img src="img/icon/flag.png">&nbsp; <span>상위 30%</span></div>
+                            <div class="rank-summary"></div>
+                            <div class="rank-icon-section"><img src="img/icon/flag.png">&nbsp;&nbsp;<span class="rank-percent">상위 30%</span></div>
                         </div>
                         <div class="user-rank">
                             <div><img src="img/icon/user-icon-black.png">&nbsp;test_ID</div>
-                            <div>프로필 설명</div>
+                            <div class="profile-summary"></div>
                         </div>
                     </div>
                 </div>
@@ -193,27 +196,27 @@
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
             <div class="gridItem" id="item_dummy"></div>
-            -->
+        -->
+    </div>
+</section>
+
+<footer>
+    <div class="footer-wrapper">
+        <div class="footer-email" style="text-align: center;">
+            <a href="mailto:info@weltcorp.com" style="font-size:14px; color:#605E5E; text-decoration: none;">info@weltcorp.com</a>
         </div>
-    </section>
-  
-    <footer>
-        <div class="footer-wrapper">
-            <div class="footer-email" style="text-align: center;">
-                <a href="mailto:info@weltcorp.com" style="font-size:14px; color:#605E5E; text-decoration: none;">info@weltcorp.com</a>
-            </div>
-            <div class="footer-contact" style="text-align: center; line-height: 60px; height: 60px;">
-                <span style="font-size:42px; font-family: 'Raleway', sans-serif; color:#2D3647;">CONTACT US</span>
-            </div>
-            <div class="footer-copyright" style="text-align: center; margin-bottom: 10px;">
-                <span style="font-size:14px; color:#605E5E;">© 2020 by WELT Corp. All rights reserved.</span>
-            </div>
-            <div class="footer-icon" style="display: flex; justify-content: center; column-gap: 15px;">
-                <a href="https://www.facebook.com/weltcorp" target="_blank"><img alt="Facebook" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/aebe5b6fd55f471a936c72ff2c8289d7.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/aebe5b6fd55f471a936c72ff2c8289d7.webp"></a>
-                <a href="https://www.youtube.com/channel/UC6JArYKD5SgTMBaiydya6nA" target="_blank"><img alt="YouTube" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/a1fed5f687844a6e8f42e017f71dfcb4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/a1fed5f687844a6e8f42e017f71dfcb4.webp"></a>
-                <a href="https://instagram.com/weltcorp" target="_blank"><img alt="Instagram" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/40898a93cfff4578b1779073137eb1b4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/40898a93cfff4578b1779073137eb1b4.webp"></a>
-            </div>
+        <div class="footer-contact" style="text-align: center; line-height: 60px; height: 60px;">
+            <span style="font-size:42px; font-family: 'Raleway', sans-serif; color:#2D3647;">CONTACT US</span>
         </div>
-    </footer>
+        <div class="footer-copyright" style="text-align: center; margin-bottom: 10px;">
+            <span style="font-size:14px; color:#605E5E;">© 2020 by WELT Corp. All rights reserved.</span>
+        </div>
+        <div class="footer-icon" style="display: flex; justify-content: center; column-gap: 15px;">
+            <a href="https://www.facebook.com/weltcorp" target="_blank"><img alt="Facebook" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/aebe5b6fd55f471a936c72ff2c8289d7.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/aebe5b6fd55f471a936c72ff2c8289d7.webp"></a>
+            <a href="https://www.youtube.com/channel/UC6JArYKD5SgTMBaiydya6nA" target="_blank"><img alt="YouTube" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/a1fed5f687844a6e8f42e017f71dfcb4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/a1fed5f687844a6e8f42e017f71dfcb4.webp"></a>
+            <a href="https://instagram.com/weltcorp" target="_blank"><img alt="Instagram" style="width: 42px; height: 42px; object-fit: cover;" src="https://static.wixstatic.com/media/40898a93cfff4578b1779073137eb1b4.png/v1/fill/w_42,h_42,al_c,q_85,usm_0.66_1.00_0.01/40898a93cfff4578b1779073137eb1b4.webp"></a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

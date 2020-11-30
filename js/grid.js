@@ -1,18 +1,34 @@
-let graphDate = new Date();
+let graphDate = new Date(); // initGraphTime() || section.js -> setTodayDate();
+graphDate.setFullYear(2019);
+graphDate.setMonth(6 - 1);
+graphDate.setDate(20);
+
+const USER_ID = '1nhBflpO9ehPOndqzldvHWB3ILS2';
+const USER_DATE = '2019-06-20';
+const USER_TIME = '04:00:00';
+function getDateString(param_date) {
+    const year = param_date.getFullYear();
+    const month = param_date.getMonth() + 1 < 10? `0${param_date.getMonth() + 1}` : `${param_date.getMonth() + 1}`;
+    const date = param_date.getDate();
+
+    return `${year}-${month}-${date}`;
+}
+
 let todayUserData = {
-    calorie : 1000,
+    calory : 1000,
     step : 1205,
     distance : 2.1,
-    overeating : 3, 
+    sitting : 3, 
     waist : 23
 };
 
-function getTodayUserData(userid) {
-    // 임시 //
+function getTodayUserData(user_id, date, time, callback) {
+    todayUserData = getUserData(user_id,date,time);
+    callback();
 } 
 
 window.addEventListener('DOMContentLoaded', function() {
-    getTodayUserData(123);
+    getTodayUserData(USER_ID, USER_DATE, USER_TIME, initData);
 
     Sortable.create(dashGrid, { 
         handle: '.handle',
@@ -20,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
         animation: 150,
     });
 
-    // ===== 그래프 ===== 
+    /*// ===== 그래프 ===== 
     const menuHtml = [
         `<div class="graph-radio-wrapper swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0">
             <input type="radio" id="walk" name="graphmenu" value="walk" checked>
@@ -32,7 +48,7 @@ window.addEventListener('DOMContentLoaded', function() {
         </div>`,
         `<div class="graph-radio-wrapper swiper-pagination-bullet" tabindex="0">
             <input type="radio" id="overeating" name="graphmenu" value="overeating">
-            <label for="overeating">과식</label>
+            <label for="overeating">칼로리</label>
         </div>`
     ];
     const swiper_item1 = new Swiper('.swiper-container.item-1', {
@@ -43,7 +59,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 return menuHtml[index];
             },
         },
-      });
+    });*/
 
     const swiper_item5 = new Swiper('.swiper-container.item-5', {
         navigation: {
@@ -51,10 +67,13 @@ window.addEventListener('DOMContentLoaded', function() {
             prevEl: '.swiper-button-prev.item-5',
         },
     });
+});
 
+function initData() {
+    getDataSet(USER_DATE);
     initGraphSection();
     addTimeRateClickEvent();
-    addMenuClickEvent();
+    addMenuClickElement(addMenuClickEvent);
     addChangeTimeEvent();
     initGraphTime();
     // ================== 
@@ -79,9 +98,44 @@ window.addEventListener('DOMContentLoaded', function() {
     // ====== 운동 정보 ======
     initYoutubeInfo();
     // ==================
-});
+}
 
 // ============================= 그래프 =============================
+let globalDataSet;
+function getDataSet(date) {
+    let dataset = getTimeIntervalData(USER_ID, date);
+
+    for(let i = 0; i < 3; i++) {
+        const menuidx = ["menu1", "menu2", "menu3"];
+        if(dataset[i][menuidx[i]][0].date.length != 7) {
+            const day = ['일', '월', '화', '수', '목', '금', '토'];
+            let today = dataset[i][menuidx[i]][0].date.length-1;
+    
+            while(today < 6) {
+                today++;
+                dataset[i][menuidx[i]][0].date.push(day[today]);
+                dataset[i][menuidx[i]][0].data.push(0);
+            }
+        }
+    }
+
+    for(let i = 0; i < 3; i++) {
+        const menuidx = ["menu1", "menu2", "menu3"];
+        if(dataset[i][menuidx[i]][2].date.length != 12) {
+            const day = ['1월', '2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+            let today = dataset[i][menuidx[i]][2].date.length-1;
+    
+            while(today < 11) {
+                today++;
+                dataset[i][menuidx[i]][2].date.push(day[today]);
+                dataset[i][menuidx[i]][2].data.push(0);
+            }
+        }
+    }
+
+    globalDataSet = dataset;
+}
+
 function initGraphSection() {
     /*const dataset = [ // *** 하단의 데이터를 함수로 받아와야함 ***
         { // 걸음수(요일별)
@@ -98,7 +152,13 @@ function initGraphSection() {
         }
     ];*/
 
-    const dataset = getGraphData(new Date(), null, 0);
+
+    //const dataset = getGraphData(USER_DATE, null, 0);
+    let returnData = [];
+    returnData.push(globalDataSet[0]["menu1"][0]);
+    returnData.push(globalDataSet[1]["menu2"][0]);
+    returnData.push(globalDataSet[2]["menu3"][0]);
+    const dataset = returnData;
 
     // 처음 화면에 보여지는 걸음수||허리둘레||과식 별 데이터를 설정
     dataset.forEach(function(d, i) {
@@ -106,11 +166,40 @@ function initGraphSection() {
     });
 }
 
+function addMenuClickElement(callback) {
+    const menuHtml = [
+        `<div class="graph-radio-wrapper swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0">
+            <input type="radio" id="walk" name="graphmenu" value="walk" checked>
+            <label for="walk">걸음수</label>
+        </div>`,
+        `<div class="graph-radio-wrapper swiper-pagination-bullet" tabindex="0">
+            <input type="radio" id="waist" name="graphmenu" value="waist">
+            <label for="waist">허리둘레</label>
+        </div>`,
+        `<div class="graph-radio-wrapper swiper-pagination-bullet" tabindex="0">
+            <input type="radio" id="overeating" name="graphmenu" value="overeating">
+            <label for="overeating">칼로리</label>
+        </div>`
+    ];
+    const swiper_item1 = new Swiper('.swiper-container.item-1', {
+        pagination: {
+            el: '.graph-menu',
+            clickable: true,
+                renderBullet: function (index, className) {
+                return menuHtml[index];
+            },
+        },
+    });
+
+    callback();
+}
 function addMenuClickEvent() {
     const menuEl = document.querySelectorAll('.graph-radio-wrapper');
-    
     menuEl.forEach(function(el) {
         el.addEventListener('click', function() {
+            if(getDateString(graphDate) != USER_DATE) {
+                getDataSet(USER_DATE);
+            }
             document.querySelector('.timerate.checked').className = 'timerate';
             document.querySelector('.timerate').className = 'timerate checked';
             document.querySelector('.swiper-pagination-bullet-active').classList.toggle('swiper-pagination-bullet-active');
@@ -128,6 +217,11 @@ function addTimeRateClickEvent() {
         el.addEventListener('click', function() {
             document.querySelector('.timerate.checked').className = 'timerate';
             el.className = 'timerate checked';
+            
+            if(getDateString(graphDate) != USER_DATE) {
+                getDataSet(USER_DATE);
+            }
+            
             changeGraphTimeRate(el.id);
             changeGraphInfoFromTimeRate(el.id);
         });
@@ -164,7 +258,16 @@ function changeGraphTimeRate(elementId) {
         }
     ];*/
 
-    const dataset = getGraphData(new Date(), menu, null);
+    //const dataset = getGraphData(getDateString(graphDate), menu, null);
+    let returnData;
+    if(menu == 'menu1') {
+        returnData = globalDataSet[0]["menu1"];
+    } else if(menu == 'menu2') {
+        returnData = globalDataSet[1]["menu2"];
+    } else if(menu == 'menu3') {
+        returnData = globalDataSet[2]["menu3"];
+    }
+    const dataset = returnData;
 
     const svg = document.querySelector(`.d3-graph.${menu}`); 
     while(svg.hasChildNodes()) { 
@@ -194,6 +297,10 @@ function addChangeTimeEvent() {
                 setGraphTime();
             } break;
         }
+
+        getDataSet(getDateString(graphDate));
+        changeGraphTimeRate(timerate);
+        setGraphTime();
     });
 
     nextButtonEl.addEventListener('click', function() {
@@ -218,6 +325,9 @@ function addChangeTimeEvent() {
 
 function initGraphTime() {
     graphDate = new Date();
+    graphDate.setFullYear(2019);
+    graphDate.setMonth(6 - 1);
+    graphDate.setDate(20);
     
     const graphDateInfoEl = document.querySelector('.graph-date-info');
 
@@ -397,7 +507,7 @@ function createGraphInfo(dataset, menu) {
             .attr('fill', 'orange');
 
             const idx = parseInt(d3.select(this).attr('num'));
-            const value = data[idx];
+            const value = parseInt(data[idx]);
             d3.select(`#tooltip.${menu}`)
             .select('#value')
             .text(value);
@@ -419,8 +529,41 @@ function createGraphInfo(dataset, menu) {
         });
 }
 
-function getGraphData(time, menu, timerate) { // menu1, menu2, menu3, 0,1,2
-    const dataset = {
+function getGraphData(date, menu, timerate) { // menu1, menu2, menu3, 0,1,2
+    
+    let dataset = getTimeIntervalData(USER_ID, date);
+
+    for(let i = 0; i < 3; i++) {
+        const menuidx = ["menu1", "menu2", "menu3"];
+        if(dataset[i][menuidx[i]][0].date.length != 7) {
+            const day = ['일', '월', '화', '수', '목', '금', '토'];
+            let today = dataset[i][menuidx[i]][0].date.length-1;
+    
+            while(today < 6) {
+                today++;
+                dataset[i][menuidx[i]][0].date.push(day[today]);
+                dataset[i][menuidx[i]][0].data.push(0);
+            }
+        }
+    }
+
+    for(let i = 0; i < 3; i++) {
+        const menuidx = ["menu1", "menu2", "menu3"];
+        if(dataset[i][menuidx[i]][2].date.length != 12) {
+            const day = ['1월', '2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+            let today = dataset[i][menuidx[i]][2].date.length-1;
+    
+            while(today < 11) {
+                today++;
+                dataset[i][menuidx[i]][2].date.push(day[today]);
+                dataset[i][menuidx[i]][2].data.push(0);
+            }
+        }
+    }
+    
+
+    console.log(dataset);
+    /*const dataset = {
         "menu1" : [
             { // 걸음수 데이터(요일별)
                 data : [102, 222, 1233, 2344, 235, 26, 17],
@@ -463,152 +606,158 @@ function getGraphData(time, menu, timerate) { // menu1, menu2, menu3, 0,1,2
                 date : ['1월', '2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
             }
         ]
-    };
+    };*/
 
     if(menu == null) { // 각 메뉴마다의 요일별 데이터
         let returnData = [];
-        returnData.push(dataset["menu1"][0]);
-        returnData.push(dataset["menu2"][0]);
-        returnData.push(dataset["menu3"][0]);
+        returnData.push(dataset[0]["menu1"][0]);
+        returnData.push(dataset[1]["menu2"][0]);
+        returnData.push(dataset[2]["menu3"][0]);
         
         return returnData;
     }
     else if(timerate == null) { // 해당 메뉴의 요일별/주간별/월별 데이터
-        return dataset[menu];
+        if(menu == 'menu1') {
+            return dataset[0]["menu1"];
+        } else if(menu == 'menu2') {
+            return dataset[1]["menu2"];
+        } else if(menu == 'menu3') {
+            return dataset[2]["menu3"];
+        }
     }
 }
 // ==================================================================
 
 // ============================= 랭킹 =============================
+let userData = [];
 function initRankSection() {
-    //*** 하단의 데이터를 함수로 받아와야함 ***
-    const dataset = [
-        [ // 걸음수
-            {
-                name : '김누구',
-                value : 500
-            },
-            {
-                name : '박누구',
-                value : 400
-            },
-            {
-                name : '최누구',
-                value : 300
-            },
-            {
-                name : '양누구',
-                value : 200
-            },
-            {
-                name : '차누구',
-                value : 100
-            }
-        ],
-        [ // 허리둘레
-            {
-                name : '김누구',
-                value : 20
-            },
-            {
-                name : '박누구',
-                value : 21
-            },
-            {
-                name : '최누구',
-                value : 22
-            },
-            {
-                name : '양누구',
-                value : 23
-            },
-            {
-                name : '차누구',
-                value : 24
-            }
-        ],
-        [ // 과식
-            {
-                name : '김누구',
-                value : 0
-            },
-            {
-                name : '박누구',
-                value : 1
-            },
-            {
-                name : '최누구',
-                value : 2
-            },
-            {
-                name : '양누구',
-                value : 3
-            },
-            {
-                name : '차누구',
-                value : 4
-            }
-        ]
-    ];
+    let dataset = [];
+    dataset.push(getRankingData(USER_ID, 0, USER_DATE));
+    dataset.push(getRankingData(USER_ID, 1, USER_DATE));
+    dataset.push(getRankingData(USER_ID, 2, USER_DATE));
 
     const slideEl = document.querySelectorAll('.swiper-slide.item-5');
+    const unit = ['걸음', '인치', 'kcal'];
     slideEl.forEach(function(el, idx) {
-        const data = dataset[idx];
-        const unit = ['걸음', '인치', '회'];
+        const data = dataset[idx]["top5 rank"];
+        const r_name = [
+            ['박OO', '최OO', '김OO', '정OO', '유OO'],
+            ['박OO', '정OO', '유OO', '소OO', '마OO'],
+            ['박OO', '성OO', '지OO', '추OO', '유OO']
+        ];
 
         let innerText = ``;
         for(let i = 0; i < 5; i++) {
-            innerText += `<li><div>${i+1}위</div><div><img src="img/icon/user-icon-black.png">&nbsp;${data[i].name}</div><div>${data[i].value}${unit[idx]}</div></li>`;
+            innerText += `<li><div>${i+1}위</div><div><img src="img/icon/user-icon-black.png">&nbsp;${r_name[idx][i]}</div><div>${parseInt(data[i].value)} ${unit[idx]}</div></li>`;
         }
         el.innerHTML = `<ul>${innerText}</ul>`;
     });
 
-    //*** 하단의 데이터를 함수로 받아와야함 ***
-    const userdata = [
-        { // 걸음수의 순위 및 값
-            rank : 123,
-            value : 30
-        },
-        { // 허리둘레의 순위 및 값
-            rank : 201,
-            value : 30
-        },
-        { // 과식의 순위 및 값
-            rank : 13,
-            value : 10
-        }
-    ];
+    userData.push(dataset[0].user_rank[0]);
+    userData.push(dataset[1].user_rank[0]);
+    userData.push(dataset[2].user_rank[0]);
+    
+    const profileEl = document.querySelector('.profile-summary');
+    profileEl.innerHTML = `${parseInt(userData[0].value)} ${unit[0]}`;
+
+    const rankPercentEl = document.querySelector('.rank-percent');
+    rankPercentEl.innerHTML = `상위 ${parseInt(userData[0].rank/40*100.0)} %`;
+
+    const rankSummaryEl = document.querySelector('.rank-summary');
+    let rankText = '';
+    const rankPercent = parseInt(userData[0].rank/40*100.0);
+    if(rankPercent <= 10) {
+        rankText = `이보다 더 좋을 수 없어요!`;
+    }
+    else if(rankPercent <= 20) {
+        rankText = `건강관리를 잘 하고 계시네요~`;
+    }
+    else if(rankPercent <= 50) {
+        rankText = `남들보다 더 건강해지려면 더 노력하세요!`;
+    }
+    else if(rankPercent <= 20) {
+        rankText = `건강관리에 노력이 필요합니다!`;
+    }
+
+    rankSummaryEl.innerHTML = rankText;
 }
 
 function addRankMenuClickEvent() {
     const prevEl = document.querySelector('.swiper-button-prev.item-5');
     const nextEl = document.querySelector('.swiper-button-next.item-5');
-    const menuText = ['걸음수', '허리둘레', '과식'];
+    const menuText = ['걸음수', '허리둘레', '소모 칼로리'];
+    const unit = ['걸음', '인치', 'kcal'];
 
     prevEl.addEventListener('click', function() {
         let menu;
         if(prevEl.getAttribute('aria-disabled') == 'false' && nextEl.getAttribute('aria-disabled') == 'false') {
-            menu = 1; // 걸음수
-        } else if(prevEl.getAttribute('aria-disabled') == 'true' && nextEl.getAttribute('aria-disabled') == 'false') {
-            menu = 0; // 과식
+            menu = 0; // 허리둘레 -> 걸음수
+        } else if(prevEl.getAttribute('aria-disabled') == 'false' && nextEl.getAttribute('aria-disabled') == 'true') {
+            menu = 1; // 소모 칼로리 -> 허리둘레
         } else {
-            menu = 2; // 허리둘레
+            menu = 2;
         }
         
         document.querySelector('.swiper-button-menu.item-5').innerHTML = menuText[menu];
+
+        const profileEl = document.querySelector('.profile-summary');
+        profileEl.innerHTML = `${parseInt(userData[menu].value)} ${unit[menu]}`;
+        const rankPercentEl = document.querySelector('.rank-percent');
+        rankPercentEl.innerHTML = `상위 ${parseInt(userData[menu].rank/40*100.0)} %`;
+
+        const rankSummaryEl = document.querySelector('.rank-summary');
+        let rankText = '';
+        const rankPercent = parseInt(userData[menu].rank/40*100.0);
+        if(rankPercent <= 10) {
+            rankText = `이보다 더 좋을 수 없어요!`;
+        }
+        else if(rankPercent <= 20) {
+            rankText = `건강관리를 잘 하고 계시네요~`;
+        }
+        else if(rankPercent <= 50) {
+            rankText = `남들보다 더 건강해지려면 더 노력하세요!`;
+        }
+        else if(rankPercent <= 20) {
+            rankText = `건강관리에 노력이 필요합니다!`;
+        }
+
+        rankSummaryEl.innerHTML = rankText;
     });
 
     nextEl.addEventListener('click', function() {
         let menu;
-        if(prevEl.getAttribute('aria-disabled') == 'false' && nextEl.getAttribute('aria-disabled') == 'false') {
-            menu = 1; // 걸음수
-        } else if(prevEl.getAttribute('aria-disabled') == 'false' && nextEl.getAttribute('aria-disabled') == 'true') {
-            menu = 2; // 과식
+        if(prevEl.getAttribute('aria-disabled') == 'true' && nextEl.getAttribute('aria-disabled') == 'false') {
+            menu = 1; // 걸음수 -> 허리둘레
+        } else if(prevEl.getAttribute('aria-disabled') == 'false' && nextEl.getAttribute('aria-disabled') == 'false') {
+            menu = 2; // 허리둘레 -> 소모 칼로리
         } else {
-            menu = 0; // 허리둘레
+            menu = 0;
         }
 
         document.querySelector('.swiper-button-menu.item-5').innerHTML = menuText[menu];
+
+        const profileEl = document.querySelector('.profile-summary');
+        profileEl.innerHTML = `${parseInt(userData[menu].value)} ${unit[menu]}`;
+        const rankPercentEl = document.querySelector('.rank-percent');
+        rankPercentEl.innerHTML = `상위 ${parseInt(userData[menu].rank/40*100.0)} %`;
+
+        const rankSummaryEl = document.querySelector('.rank-summary');
+        let rankText = '';
+        const rankPercent = parseInt(userData[menu].rank/40*100.0);
+        if(rankPercent <= 10) {
+            rankText = `이보다 더 좋을 수 없어요!`;
+        }
+        else if(rankPercent <= 20) {
+            rankText = `건강관리를 잘 하고 계시네요~`;
+        }
+        else if(rankPercent <= 50) {
+            rankText = `남들보다 더 건강해지려면 더 노력하세요!`;
+        }
+        else {
+            rankText = `건강관리에 노력이 필요합니다!`;
+        }
+
+        rankSummaryEl.innerHTML = rankText;
     });
 }
 // ==================================================================
@@ -619,21 +768,34 @@ function initKcalSection() {
     const kcalSectionEl = document.querySelector('.kcal-section');
     
     // *** 하단의 데이터를 함수로 받아와야함 ***
-    const userdata = todayUserData.calorie;
+    const userdata = todayUserData.calory;
 
-    kcalSectionEl.innerHTML = `${userdata}kcal`;
+    kcalSectionEl.innerHTML = `${userdata.toFixed(2)}kcal`;
 }
 // ==================================================================
 
-// ============================= 과식 =============================
+// ============================= 앉은 시간 =============================
 function initOvereatingSection() {
     const overeatingValueEl = document.querySelector('.overeating-value');
     const overeatingNoticeEl = document.querySelectorAll('.overeating-notice');
     // *** 하단의 데이터를 함수로 받아와야함 ***
-    const userdata = { value : todayUserData.overeating, status : 2}; // status => 0 : 양호 | 1 : 관심 | 2 : 주의
+    const userdata = { value : todayUserData.sitting }; 
+    let status = 0; // status => 0 : 양호 | 1 : 관심 | 2 : 주의
 
-    overeatingValueEl.innerHTML = `${userdata.value}회`;
-    overeatingNoticeEl[userdata.status].classList.toggle('active');
+    if(userdata.value < 60) {
+        status = 0;
+    }
+    else if(userdata.value < 180) {
+        status = 1;
+    }
+    else {
+        status = 2;
+    }
+
+    overeatingValueEl.innerHTML = `${userdata.value}분`;
+    overeatingNoticeEl[status].classList.toggle('active');
+
+
 }
 // ==================================================================
 
@@ -646,7 +808,7 @@ function initWalkSection() {
     const userdata = { value : todayUserData.step, distance : todayUserData.distance };
 
     walkValueSectionEl.innerHTML = `걸음 수 : ${userdata.value} 걸음`;
-    walkDistanceSectionEl.innerHTML = `걸은 거리 : ${userdata.distance} km`;
+    walkDistanceSectionEl.innerHTML = `걸은 거리 : ${userdata.distance.toFixed(3)} km`;
 }
 // ==================================================================
 
@@ -654,23 +816,33 @@ function initWalkSection() {
 let videoNum = 0;
 function initYoutubeInfo() {
     const infoSectionEl = document.querySelector('.info-section');
-    
-    // *** 하단의 데이터를 함수로 받아와야함 ***
-    const userdata = { status : 1, text : `이번주 test_ID 님의 허리둘레가 1인치 증가했어요.<br>
-    이 운동이 날씬한 허리라인을 만들어 줄 거에요.` }; // status => 0 : 근육 | 1 : 다이어트 | 2 : 스트레칭
 
-    const info = youtube_info[userdata.status];
-    const search = youtube_search[userdata.status];
+    const userCondition = getUserCondition(USER_ID, USER_DATE); // sitting : 0 (이상없음), 1 (오래 앉아있음 2시간 이상 | waist : 0 (이상없음), 1 (허리 증가 2인치 이상)
+    
+    let status = 0; // status => 0 : 근육 | 1 : 다이어트 | 2 : 스트레칭
+    if(userCondition.sitting == 1) {
+        status = 2;
+    } else if(userCondition.waist == 1) {
+        status = 1;
+    } else {
+        status = 0;
+    }
+
+    const statusText = ['근육운동', '다이어트', '스트레칭'];
+    const infoText = ['오늘은 근육 운동 어때요?', '허리둘레가 2인치 이상 증가했어요!', '너무 오래 앉아 있으셨네요!' ];
+
+    const info = youtube_info[status];
+    const search = youtube_search[status];
     //const randNum = Math.floor(Math.random()*3);
-    videoNum = 1;
+    let videoNum = 1;
 
     document.querySelector('#item6 > .grid-header').innerHTML = `${info[videoNum].title}`;
     
     //<div class="info-header">${info[randNum].title}</div>
     const innerhtml = `
         <iframe width="400" height="225" src="${info[videoNum].link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="info-text">${userdata.text}</div>
-        <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">허리둘레</span> 운동 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
+        <div class="info-text">${infoText[status]}</div>
+        <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">${statusText[status]}</span> 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
     `;
 
     infoSectionEl.innerHTML = innerhtml;
@@ -686,8 +858,8 @@ function initYoutubeInfo() {
         document.querySelector('#item6 > .grid-header').innerHTML = `${info[videoNum].title}`;
         const innerhtml = `
             <iframe width="400" height="225" src="${info[videoNum].link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="info-text">${userdata.text}</div>
-            <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">허리둘레</span> 운동 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
+            <div class="info-text">${infoText[status]}</div>
+            <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">${statusText[status]}</span> 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
         `;
 
         infoSectionEl.innerHTML = innerhtml;
@@ -700,8 +872,8 @@ function initYoutubeInfo() {
         document.querySelector('#item6 > .grid-header').innerHTML = `${info[videoNum].title}`;
         const innerhtml = `
             <iframe width="400" height="225" src="${info[videoNum].link}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="info-text">${userdata.text}</div>
-            <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">허리둘레</span> 운동 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
+            <div class="info-text">${infoText[status]}</div>
+            <div class="info-search-link" href="${search.link}" target="_blank"> 더 많은 <span style="color: royalblue;">${statusText[status]}</span> 영상은 <a href="${search.link}" target="_blank" style="color:royalblue;">여기</a> 를 클릭</div>
         `;
 
         infoSectionEl.innerHTML = innerhtml;

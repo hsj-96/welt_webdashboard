@@ -238,6 +238,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 180px;
 }
 .swiper-button-section.item-5 {
     display: flex;
@@ -246,6 +247,7 @@
     height: 10%;
     line-height: 10%;
     align-items: center;
+    z-index: 2;
 }
 .swiper-button-prev.item-5, .swiper-button-next.item-5 {
     position: relative;
@@ -292,6 +294,10 @@
     width: 20px;
     height: 20px;
 }
+.rank-summary {
+    width: 80%;
+    height: 60px;
+}
 /* ----------------------------------------- */
 
 
@@ -313,9 +319,10 @@
 }
 .overeating-value {
     color: red;
-    font-size: 30px;
+    font-size: 27px;
     font-weight: bolder;
     text-align: center;
+    margin-bottom: 12px;
 }
 .overeating-notice-wrapper {
     display: flex;
@@ -342,7 +349,7 @@
     border-bottom: 0;
     width: 60%;
     position: absolute;
-    bottom: 43px;
+    bottom: 37px;
     display: block;
     margin-left: 18px;
     z-index: 0;
@@ -379,8 +386,8 @@
     margin-bottom: 10px;
 }
 .info-text {
-    margin: 0px;
-    font-size: 12px;
+    margin: 5px;
+    font-size: 17px;
 }
 .info-search-link {
     font-size: 17px;
